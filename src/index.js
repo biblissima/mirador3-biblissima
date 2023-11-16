@@ -198,7 +198,8 @@ if (iiifResource && !iiifResource.startsWith('http') && !iiifResource.startsWith
     let target = contentState.target;
     if (Array.isArray(target)) {
       for (var i=0; i<target.length; i++) {
-        let item = target[i];
+        let item;
+        item = target[i];
         switch(item.type) {
           case 'Manifest':
             config.windows.push({
@@ -213,7 +214,10 @@ if (iiifResource && !iiifResource.startsWith('http') && !iiifResource.startsWith
             }
         }
       }
+      config.window.defaultView = 'single';
     }
+    // dispatch updated config
+    miradorInstance.store.dispatch(Mirador.actions.importConfig(config));
   }
 }
 
